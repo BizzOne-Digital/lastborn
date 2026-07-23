@@ -25,13 +25,9 @@ export default function Footer() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <div className="flex items-center gap-3 mb-5">
-              <div className="w-16 h-16 rounded-xl bg-white p-1.5 flex items-center justify-center flex-shrink-0">
-                <Image src="/logo.png" alt="Last Born Canada" width={56} height={56} className="w-full h-full object-contain" />
-              </div>
-              <div>
-                <p className="font-display font-700 text-base leading-none uppercase">Last Born Canada</p>
-                <p className="text-xs text-gold tracking-widest">LBC – Air & Sea Freight</p>
+            <div className="mb-5">
+              <div className="inline-flex rounded-xl bg-white p-2">
+                <Image src="/logo.png" alt="Last Born Canada" width={220} height={70} className="h-16 w-auto object-contain block" />
               </div>
             </div>
             <p className="text-white/50 text-sm leading-relaxed">
