@@ -1,31 +1,9 @@
-"use client";
 import { Mail } from "lucide-react";
+import { getTeamMembers } from "@/lib/data";
 
-const team = [
-  {
-    name: "Adv. Mwanjara A.A",
-    role: "CEO / Founder",
-    office: "Tanzania Office",
-    img: "/Mwanjara.jpeg",
-    bio: "Founded Last Born Canada with a mission to simplify shipping for the African diaspora in Canada.",
-  },
-  {
-    name: "Jacqueline Musyimi",
-    role: "Logistics Manager",
-    office: "Canada and Africa",
-    img: "/Jacqueline.jpeg",
-    bio: "Manages all inbound and outbound shipments and coordinates logistics between Canada and Africa.",
-  },
-  {
-    name: "Anna Mwakapala",
-    role: "Client Relations",
-    office: "Both Offices",
-    img: "/Anna.jpeg",
-    bio: "Dedicated to keeping our clients informed and happy from pickup to final delivery.",
-  },
-];
+export default async function Team() {
+  const team = await getTeamMembers();
 
-export default function Team() {
   return (
     <section id="team" className="py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -42,8 +20,8 @@ export default function Team() {
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {team.map((member, i) => (
-            <div key={i} className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 group hover:shadow-xl transition-shadow duration-300">
+          {team.map((member: any) => (
+            <div key={member._id} className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 group hover:shadow-xl transition-shadow duration-300">
               <div className="relative h-80 overflow-hidden bg-white">
                 <img
                   src={member.img}

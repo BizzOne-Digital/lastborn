@@ -1,73 +1,8 @@
-"use client";
+import { getGalleryImages } from "@/lib/data";
 
-const images = [
-  {
-    src: "https://images.unsplash.com/photo-1494412651409-8963ce7935a7?w=800&q=80&fit=crop",
-    alt: "Air cargo loading",
-    span: "col-span-2 row-span-2",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1530521954074-e64f6810b32d?w=600&q=80&fit=crop",
-    alt: "Container ship at port",
-    span: "",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1616401784845-180882ba9ba8?w=600&q=80&fit=crop",
-    alt: "Cargo logistics warehouse",
-    span: "",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1570155396cer?w=600&q=80&fit=crop",
-    alt: "Shipping containers port",
-    src2: "https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=600&q=80&fit=crop",
-    span: "",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1459750521914-ced6aeafbf4c?w=600&q=80&fit=crop",
-    alt: "Aerial view of cargo ship",
-    span: "",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&q=80&fit=crop",
-    alt: "Construction and cargo delivery",
-    span: "col-span-2",
-  },
-];
+export default async function Gallery() {
+  const galleryImages = await getGalleryImages();
 
-const galleryImages = [
-  {
-    src: "https://images.unsplash.com/photo-1494412651409-8963ce7935a7?w=800&q=80&fit=crop",
-    alt: "Air cargo operations",
-    class: "col-span-2 row-span-2",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1530521954074-e64f6810b32d?w=600&q=80&fit=crop",
-    alt: "Container ship",
-    class: "",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1616401784845-180882ba9ba8?w=600&q=80&fit=crop",
-    alt: "Cargo warehouse",
-    class: "",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=600&q=80&fit=crop",
-    alt: "Shipping port",
-    class: "",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1459750521914-ced6aeafbf4c?w=600&q=80&fit=crop",
-    alt: "Freight delivery",
-    class: "",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&q=80&fit=crop",
-    alt: "Logistics operations",
-    class: "col-span-2",
-  },
-];
-
-export default function Gallery() {
   return (
     <section id="gallery" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -86,10 +21,10 @@ export default function Gallery() {
 
         {/* Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[180px]">
-          {galleryImages.map((img, i) => (
+          {galleryImages.map((img: any) => (
             <div
-              key={i}
-              className={`relative overflow-hidden rounded-2xl group ${img.class}`}
+              key={img._id}
+              className={`relative overflow-hidden rounded-2xl group ${img.spanClass}`}
             >
               <img
                 src={img.src}

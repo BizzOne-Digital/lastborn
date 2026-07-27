@@ -25,14 +25,31 @@ const offices = [
 
 export default function Contact() {
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
   const [form, setForm] = useState({
     name: "", email: "", phone: "", service: "", message: ""
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate form submission
-    setTimeout(() => setSent(true), 500);
+    setSubmitting(true);
+    setError("");
+
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form),
+    });
+
+    setSubmitting(false);
+
+    if (!res.ok) {
+      setError("Something went wrong. Please try again or contact us directly.");
+      return;
+    }
+
+    setSent(true);
   };
 
   return (
@@ -178,12 +195,14 @@ export default function Contact() {
                       className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition-colors bg-white resize-none"
                     />
                   </div>
+                  {error && <p className="text-red-500 text-sm">{error}</p>}
                   <button
                     type="submit"
-                    className="w-full flex items-center justify-center gap-2 py-4 bg-gold text-white font-semibold rounded-xl hover:bg-gold-dark transition-colors"
+                    disabled={submitting}
+                    className="w-full flex items-center justify-center gap-2 py-4 bg-gold text-white font-semibold rounded-xl hover:bg-gold-dark transition-colors disabled:opacity-60"
                   >
                     <Send className="w-4 h-4" />
-                    Send Message
+                    {submitting ? "Sending..." : "Send Message"}
                   </button>
                   <p className="text-xs text-gray-400 text-center">
                     For pricing, please contact us directly. All quotes are customized to your shipment.

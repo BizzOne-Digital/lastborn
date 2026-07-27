@@ -1,60 +1,12 @@
-"use client";
 import Link from "next/link";
-import { Plane, Ship, Car, Train, Truck, Package, Home, MapPin } from "lucide-react";
+import { Plane, Ship, Car, Train, Truck, Package, Home, MapPin, type LucideIcon } from "lucide-react";
+import { getServices } from "@/lib/data";
 
-const services = [
-  {
-    icon: Plane,
-    title: "Air Freight",
-    desc: "Direct flights from Canada to Tanzania, Mombasa Kenya and back. Fast and reliable air cargo solutions for time-sensitive shipments.",
-    tag: "Express",
-    img: "https://images.unsplash.com/photo-1571086291540-b137111fa1c7?q=80",
-  },
-  {
-    icon: Ship,
-    title: "Ocean Freight",
-    desc: "Sea freight shipping up to Tanzania in approximately 90 days. Cost-effective bulk cargo solutions for large shipments.",
-    tag: "~90 Days",
-    img: "https://images.unsplash.com/photo-1605745341112-85968b19335b?q=80",
-  },
-  {
-    icon: Car,
-    title: "Car Shipping",
-    desc: "Safe and secure vehicle transportation from Canada to Africa. Full container or shared container options available.",
-    tag: "Vehicles",
-    img: "https://images.unsplash.com/photo-1720014836833-20d9992a510f?q=80&fit=crop",
-  },
-  {
-    icon: Train,
-    title: "Rail Shipping",
-    desc: "Inland rail connections to move cargo efficiently once it arrives at the port destination.",
-    tag: "Inland",
-    img: "https://images.unsplash.com/photo-1568514328861-5465017e40fc?q=80&fit=crop",
-  },
-  {
-    icon: Truck,
-    title: "Truck Freight",
-    desc: "Ground transportation and last-mile delivery services connecting ports to final destinations across East Africa.",
-    tag: "Ground",
-    img: "https://images.unsplash.com/photo-1766561994067-dbd575e1cff2?q=80&fit=crop",
-  },
-  {
-    icon: Package,
-    title: "Door-to-Door Shipping",
-    desc: "Complete door-to-door logistics — we pick up from your location in Canada and deliver to the final address in Africa.",
-    tag: "Full Service",
-    img: "https://images.unsplash.com/photo-1614018453562-77f6180ce036?q=80&fit=crop",
-  },
-  {
-    icon: Home,
-    title: "Household Goods & Personal Effects",
-    desc: "Careful handling of personal belongings, household furniture, appliances, and personal effects for families relocating.",
-    tag: "Personal",
-    img: "https://images.unsplash.com/photo-1449247666642-264389f5f5b1?q=80&fit=crop",
-  },
-];
+const ICONS: Record<string, LucideIcon> = { Plane, Ship, Car, Train, Truck, Package, Home };
 
-export default function Services() {
+export default async function Services() {
+  const services = await getServices();
+
   return (
     <section id="services" className="py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -88,11 +40,11 @@ export default function Services() {
 
         {/* Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((s, i) => {
-            const Icon = s.icon;
+          {services.map((s: any) => {
+            const Icon = ICONS[s.icon] || Package;
             return (
               <div
-                key={i}
+                key={s._id}
                 className="service-card bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm"
               >
                 <div className="relative h-44 overflow-hidden">
