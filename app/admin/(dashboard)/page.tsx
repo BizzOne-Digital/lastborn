@@ -6,6 +6,8 @@ import Review from "@/models/Review";
 import ContactSubmission from "@/models/ContactSubmission";
 import { Wrench, Users, Image as ImageIcon, Star, Mail } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminDashboardPage() {
   await connectDB();
 
